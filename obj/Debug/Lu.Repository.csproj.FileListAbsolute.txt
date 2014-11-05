@@ -1,0 +1,9 @@
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\bin\Debug\Lu.Repository.dll.config
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\bin\Debug\Lu.Repository.dll
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\bin\Debug\Lu.Repository.pdb
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\bin\Debug\EntityFramework.dll
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\bin\Debug\EntityFramework.xml
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\obj\Debug\Lu.Repository.dll
+C:\Users\xgluxv\SkyDrive\Code\my\2014\Lu.Repository\obj\Debug\Lu.Repository.pdb
