@@ -1,0 +1,1 @@
+## Lu.Repository is repository pattern default for entity framework 6.x ##
