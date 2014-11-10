@@ -4,7 +4,7 @@ using System;
 using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Collections.Generic;
 #endregion
 
 namespace Lu.Repository.Providers.EntityFramework

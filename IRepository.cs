@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,6 +21,8 @@ namespace Lu.Repository
         void Update(TEntity entity);
         void Delete(object id);
         void Delete(TEntity entity);
+        //Task<int> DeleteBatchAndCommitAsync(Expression<Func<TEntity, bool>> predicate);
+        //Task<int> UpdateBatchAndCommitAsync(Expression<Func<TEntity, bool>> filterPredicate,Expression<Func<TEntity, TEntity>> updatePredicate);
         IRepositoryQuery<TEntity> Query();
     }
 }

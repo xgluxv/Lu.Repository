@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+//using EntityFramework.Extensions;
 using Lu.Repository.Providers.EntityFramework;
 
 #endregion
@@ -94,6 +95,15 @@ namespace Lu.Repository
             _context.SyncObjectState(entity);
         }
 
+        //public virtual async Task<int> DeleteBatchAndCommitAsync(Expression<Func<TEntity, bool>> predicate)
+        //{
+        //    return await _dbSet.DeleteAsync(predicate);
+        //}
+        //public virtual async Task<int> UpdateBatchAndCommitAsync(Expression<Func<TEntity, bool>> filterPredicate,Expression<Func<TEntity, TEntity>> updatePredicate)
+        //{
+        //    return await _dbSet.UpdateAsync(filterPredicate, updatePredicate);
+        //}
+
         public virtual IRepositoryQuery<TEntity> Query()
         {
             var repositoryGetFluentHelper = new RepositoryQuery<TEntity>(this);
@@ -105,7 +115,7 @@ namespace Lu.Repository
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             List<Expression<Func<TEntity, object>>> includeProperties = null,
             int? page = null,
-            int? pageSize = null)
+            int? pageSize = null,bool tracking=true)
         {
             IQueryable<TEntity> query = _dbSet;
 
@@ -122,8 +132,9 @@ namespace Lu.Repository
                 query = query
                     .Skip((page.Value - 1) * pageSize.Value)
                     .Take(pageSize.Value);
-
-            return query;
+            if(tracking)
+                return query;
+            return query.AsNoTracking();
         }
 
         internal async Task<IEnumerable<TEntity>> GetAsync(
@@ -131,9 +142,12 @@ namespace Lu.Repository
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             List<Expression<Func<TEntity, object>>> includeProperties = null,
             int? page = null,
-            int? pageSize = null)
+            int? pageSize = null,bool tracking=true)
         {
-            return Get(filter, orderBy, includeProperties, page, pageSize).AsEnumerable();
+            var result = Get(filter, orderBy, includeProperties, page, pageSize);
+            if (tracking)
+                return result.AsEnumerable();
+            return result.AsNoTracking().AsEnumerable();
         }
     }
 }

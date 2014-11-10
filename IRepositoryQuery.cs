@@ -12,8 +12,10 @@ namespace Lu.Repository
         RepositoryQuery<TEntity> OrderBy(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy);
         RepositoryQuery<TEntity> Include(Expression<Func<TEntity, object>> expression);
         IEnumerable<TEntity> GetPage(int page, int pageSize, out int totalCount);
-        IQueryable<TEntity> Get();
-        Task<IEnumerable<TEntity>> GetAsync();
+        Task<Tuple<int, IEnumerable<TEntity>>> GetPageAsync(int page, int pageSize);
+        IQueryable<TEntity> Get(bool Tracking=true);
+        Task<IEnumerable<TEntity>> GetAsync(bool Tracking = true);
+
         IQueryable<TEntity> SqlQuery(string query, params object[] parameters);
     }
 }

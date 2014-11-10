@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 #endregion
 
@@ -51,15 +52,24 @@ namespace Lu.Repository
 
             return _repository.Get(_filter, _orderByQuerable, _includeProperties, _page, _pageSize);
         }
-
-        public IQueryable<TEntity> Get()
+        public async Task<Tuple<int, IEnumerable<TEntity>>> GetPageAsync(int page, int pageSize)
         {
-            return _repository.Get(_filter, _orderByQuerable, _includeProperties, _page, _pageSize);
+            _page = page;
+            _pageSize = pageSize;
+            var totalCount = await _repository.Get(_filter).CountAsync();
+            var result=await _repository.GetAsync(_filter, _orderByQuerable, _includeProperties, _page, _pageSize);
+            return new Tuple<int, IEnumerable<TEntity>>(totalCount, result);
+
         }
 
-        public async Task<IEnumerable<TEntity>> GetAsync()
+        public IQueryable<TEntity> Get(bool tracking=true)
         {
-            return await _repository.GetAsync(_filter, _orderByQuerable, _includeProperties, _page, _pageSize);
+            return _repository.Get(_filter, _orderByQuerable, _includeProperties, _page, _pageSize,tracking);
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAsync(bool tracking = true)
+        {
+            return await _repository.GetAsync(_filter, _orderByQuerable, _includeProperties, _page, _pageSize,tracking);
         }
 
         public IQueryable<TEntity> SqlQuery(string query, params object[] parameters)

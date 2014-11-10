@@ -1,6 +1,7 @@
 #region
 
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -47,7 +48,6 @@ namespace Lu.Repository.Providers.EntityFramework
             SyncObjectsStatePostCommit();
             return changesAsync;
         }
-
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             SyncObjectsStatePreCommit();
